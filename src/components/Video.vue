@@ -98,9 +98,9 @@
     <div class="controls__btn" v-on:click="pauseVideo">Пауза</div>
     <div class="controls__btn" v-on:click="chgSpeed(this.speed)">Скорость</div>
     <input class="controls__input" v-model="speed" type="number">
-    <div class="controls__btn" v-on:click="this.video.currentTime+=5">+5с</div>
-    <div class="controls__btn" v-on:click="this.video.currentTime-=5">-5с</div>
-    <div class="controls__btn" v-on:click="this.video.currentTime = this.seekTime;this.timer = formatTime(this.seekTime);this.currentTime = this.seekTime">Перейти к</div>
+    <div class="controls__btn" v-on:click="chgTime(this.video.currentTime + 5)">+5с</div>
+    <div class="controls__btn" v-on:click="chgTime(this.video.currentTime - 5)">-5с</div>
+    <div class="controls__btn" v-on:click="chgTime(this.seekTime)">Перейти к</div>
     <input class="controls__input" v-model="seekTime" type="number">
   </div>
 </div>
@@ -195,6 +195,11 @@ export default {
     chgSpeed(newSpeed) {
       this.speed = newSpeed;
       this.video.playbackRate = newSpeed;
+    },
+    chgTime(newTime) {
+      this.timer = this.formatTime(newTime);
+      this.video.currentTime = newTime;
+      this.currentTime = newTime;
     },
     toggleDropDownMenu(mode) {
       this.speedMenu = false;
